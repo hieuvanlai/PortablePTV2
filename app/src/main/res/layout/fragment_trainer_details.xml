@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#303030">
+
+    <RelativeLayout
+        android:layout_marginBottom="10dp"
+        android:id="@+id/relative_layout"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left"/>
+
+        <TextView
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:text="Thông tin huấn luyện viên"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <com.github.siyamed.shapeimageview.CircularImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/relative_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        app:siBorderColor="#FFFFFF"
+        app:siBorderWidth="2dp" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_avatar"
+        android:text="Bùi Quang Huy"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:padding="5dp" />
+
+    <android.support.design.widget.TabLayout
+        android:layout_marginBottom="15dp"
+        app:tabGravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/tab_layout_info"
+        android:layout_below="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.TabItem
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TabLayout>
+
+    <TextView
+        android:id="@+id/tv_age_hint"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab_layout_info"
+        android:text="Tuổi :"
+        android:textSize="16sp"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/tv_exp_hint"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_age_hint"
+        android:text="Kinh nghiệm :"
+        android:textSize="16sp"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/tv_address_hint"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_exp_hint"
+        android:text="Địa chỉ phòng tập :"
+        android:textSize="16sp"
+        android:padding="5dp" />
+    <EditText
+        android:id="@+id/edt_address"
+        android:textSize="12sp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_address_hint"/>
+
+    <TextView
+        android:id="@+id/tv_specialize_hint"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_address"
+        android:text="Chuyên môn :"
+        android:textSize="16sp"
+        android:padding="5dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="5dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@+id/tv_specialize_hint"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
