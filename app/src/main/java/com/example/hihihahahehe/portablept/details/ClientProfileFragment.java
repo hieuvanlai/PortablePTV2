@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.events.OnLoginEvent;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
+import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.github.siyamed.shapeimageview.CircularImageView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,19 +59,31 @@ public class ClientProfileFragment extends Fragment {
 
     private void initView(View view) {
         ButterKnife.bind(this, view);
-        EventBus.getDefault().register(this);
         setOnClickItem();
+        loadInfo();
     }
 
-    @Subscribe(sticky = true)
-    public void loadInfo(OnLoginEvent onLoginEvent) {
-        if(onLoginEvent != null){
-            faceBookModel = onLoginEvent.getFaceBookModel();
-            edtName.setText(faceBookModel.getLast_Name());
+    public void loadInfo() {
+        faceBookModel = RealmHandle.getData();
+        if(faceBookModel != null){
+            String firstName;
+            String lastName;
+            if(faceBookModel.getFirst_Name() == null){
+                firstName = "";
+            } else firstName = faceBookModel.getFirst_Name();
+
+            if(faceBookModel.getLast_Name() == null){
+                lastName = "";
+            } else lastName = faceBookModel.getLast_Name();
+            edtName.setText(lastName + " " + firstName);
             edtEmail.setText(faceBookModel.getEmail());
             edtBirthDay.setText(faceBookModel.getBirthday());
             edtCity.setText(faceBookModel.getLocation());
-            edtGen.setText(faceBookModel.getGender());
+            if(faceBookModel.getGender().equals("male")){
+                edtGen.setText("Nam");
+            } else if(faceBookModel.getGender().equals("female")){
+                edtGen.setText("Nữ");
+            }
         }
     }
 

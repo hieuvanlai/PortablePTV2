@@ -4,6 +4,7 @@ package com.example.hihihahahehe.portablept.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,7 @@ public class LoginFragment extends Fragment {
                 public void onSuccess(LoginResult loginResult) {
                     // App code
                     getInfoFacebook(loginResult);
+
                     ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new FirstScreenFragment(), R.id.layout_container_main, false);
                 }
 
@@ -108,8 +110,9 @@ public class LoginFragment extends Fragment {
                     faceBookModel.setId(object.getString("id"));
                     faceBookModel.setFirst_Name(object.getString("first_name"));
                     faceBookModel.setLast_Name(object.getString("last_name"));
-                    faceBookModel.setGender("gender");
+                    faceBookModel.setGender(object.getString("gender"));
 
+                    Log.d(TAG, faceBookModel.toString());
                     //Add facebook info to Realm
                     RealmHandle.addData(faceBookModel);
                 } catch (JSONException e) {
@@ -119,7 +122,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,first_name,last_name,email,gender");
+        parameters.putString("fields", "id,first_name,last_name,gender");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
     }

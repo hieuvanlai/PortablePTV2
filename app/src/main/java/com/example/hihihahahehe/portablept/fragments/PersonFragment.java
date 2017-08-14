@@ -59,21 +59,22 @@ public class PersonFragment extends Fragment {
     }
 
     public void loadData() {
-        faceBookModel = RealmHandle.getData();
-        Log.d(TAG,faceBookModel.toString());
-        String firstName;
-        String lastName;
-        if(faceBookModel.getFirst_Name() == null){
-            firstName = "";
-        } else firstName = faceBookModel.getFirst_Name();
+        if (RealmHandle.getData() != null) {
+            faceBookModel = RealmHandle.getData();
+            String firstName;
+            String lastName;
+            if (faceBookModel.getFirst_Name() == null) {
+                firstName = "";
+            } else firstName = faceBookModel.getFirst_Name();
 
-        if(faceBookModel.getLast_Name() == null){
-            lastName = "";
-        } else lastName = faceBookModel.getLast_Name();
-        tvName.setText(lastName + " " + firstName);
+            if (faceBookModel.getLast_Name() == null) {
+                lastName = "";
+            } else lastName = faceBookModel.getLast_Name();
+            tvName.setText(lastName + " " + firstName);
+        }
     }
 
-    public void setOnClickItem(){
+    public void setOnClickItem() {
         cvInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -18,6 +18,15 @@ public class FaceBookModel extends RealmObject{
     private String Gender;
     private String Birthday;
     private String Location;
+    private boolean isTrainer;
+
+    public boolean isTrainer() {
+        return isTrainer;
+    }
+
+    public void setTrainer(boolean trainer) {
+        isTrainer = trainer;
+    }
 
     public boolean isFirstTime() {
         return isFirstTime;

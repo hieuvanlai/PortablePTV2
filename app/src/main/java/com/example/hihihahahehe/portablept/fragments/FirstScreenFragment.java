@@ -51,14 +51,15 @@ public class FirstScreenFragment extends Fragment {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        int[] listIcon = {
+        int[] iconUser = {
                 R.drawable.ic_home,
                 R.drawable.ic_format_list_bulleted,
                 R.drawable.ic_calendar,
                 R.drawable.ic_notifications_none,
                 R.drawable.ic_person
         };
-        Utils.setIconBottomBar(tabLayout, listIcon);
+        
+        Utils.setIconBottomBar(tabLayout, iconUser);
         tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
 
         final View touchView = view.findViewById(R.id.view_pager);
