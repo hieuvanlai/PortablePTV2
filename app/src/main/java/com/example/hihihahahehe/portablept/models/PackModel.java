@@ -7,7 +7,9 @@ package com.example.hihihahahehe.portablept.models;
 public class PackModel {
     private String packName;
     private String coachName;
-    private String imageURL;
+    private String goal;
+    private String cost;
+    private String duration;
 
     public PackModel() {
     }
@@ -28,11 +30,27 @@ public class PackModel {
         this.coachName = coachName;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getGoal() {
+        return goal;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setGoal(String goal) {
+        this.goal = goal;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

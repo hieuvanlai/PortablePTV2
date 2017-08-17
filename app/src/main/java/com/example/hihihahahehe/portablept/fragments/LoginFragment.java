@@ -2,8 +2,12 @@ package com.example.hihihahahehe.portablept.fragments;
 
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +24,16 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,10 +62,27 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         setupUI(view);
 
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                    "com.example.hihihahahehe.portablept",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
+
         accessToken = AccessToken.getCurrentAccessToken();
         callbackManager = CallbackManager.Factory.create();
 
-        loginButton.setReadPermissions("public_profile");
+        loginButton.setReadPermissions("public_profile","email");
         // If using in a fragment
         loginButton.setFragment(this);
         // Other app specific specialization
@@ -111,8 +136,10 @@ public class LoginFragment extends Fragment {
                     faceBookModel.setFirst_Name(object.getString("first_name"));
                     faceBookModel.setLast_Name(object.getString("last_name"));
                     faceBookModel.setGender(object.getString("gender"));
+                    faceBookModel.setEmail(object.getString("email"));
+                    faceBookModel.setImg(object.getJSONObject("picture").getJSONObject("data").getString("url"));
 
-                    Log.d(TAG, faceBookModel.toString());
+                    Log.d(TAG, faceBookModel.getImg());
                     //Add facebook info to Realm
                     RealmHandle.addData(faceBookModel);
                 } catch (JSONException e) {
@@ -122,7 +149,7 @@ public class LoginFragment extends Fragment {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,first_name,last_name,gender");
+        parameters.putString("fields", "id,first_name,last_name,gender,email,picture.type(normal)");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
     }

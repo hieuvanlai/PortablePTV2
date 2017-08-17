@@ -18,6 +18,16 @@ public class FaceBookModel extends RealmObject{
     private String Gender;
     private String Birthday;
     private String Location;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     private boolean isTrainer;
 
     public boolean isTrainer() {

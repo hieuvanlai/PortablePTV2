@@ -16,13 +16,14 @@ import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.events.OnLoginEvent;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
-import com.github.siyamed.shapeimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,13 +42,12 @@ public class ClientProfileFragment extends Fragment {
     @BindView(R.id.edt_gen)
     EditText edtGen;
     @BindView(R.id.iv_avatar)
-    CircularImageView ivAvatar;
+    ImageView ivAvatar;
     private FaceBookModel faceBookModel;
 
     public ClientProfileFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +66,7 @@ public class ClientProfileFragment extends Fragment {
     public void loadInfo() {
         faceBookModel = RealmHandle.getData();
         if(faceBookModel != null){
+            Picasso.with(getContext()).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(ivAvatar);
             String firstName;
             String lastName;
             if(faceBookModel.getFirst_Name() == null){

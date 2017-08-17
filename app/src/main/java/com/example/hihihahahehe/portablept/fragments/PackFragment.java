@@ -41,14 +41,11 @@ public class PackFragment extends Fragment {
 
     private void initView(View view) {
         ButterKnife.bind(this, view);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         String[] listPack = {
                 "Fitness",
                 "Zumba",
                 "Kickfit",
-                "Tab 4",
-                "Tab 5",
-                "Tab 6",
-                "Tab 7"
         };
 
         for(int i = 0; i < listPack.length; i++){

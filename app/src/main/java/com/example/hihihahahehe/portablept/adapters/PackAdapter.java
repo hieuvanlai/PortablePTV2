@@ -1,77 +1,38 @@
 package com.example.hihihahahehe.portablept.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.PackModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by valky on 8/10/2017.
+ * Created by hihihahahehe on 8/15/17.
  */
 
-public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder> {
-
-    private List<PackModel> packModelList = new ArrayList<>();
+public class PackAdapter extends ArrayAdapter<PackModel> {
     private Context context;
-    private View.OnClickListener onClickListener;
+    private List<PackModel> packModels;
 
-    public void setOnItemClick(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
+
+    public PackAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List<PackModel> objects) {
+        super(context, resource, objects);
     }
 
-    public PackAdapter(List<PackModel> packModelList, Context context) {
-        this.packModelList = packModelList;
-        this.context = context;
-    }
-
+    @NonNull
     @Override
-    public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        //TODO add custom list pack
-        View view = null;
-        return new PackViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(PackViewHolder holder, int position) {
-        holder.setData(packModelList.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return packModelList.size();
-    }
-
-    public class PackViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivIcon;
-        TextView tvPackName;
-        TextView tvCoach;
-        View view;
-
-        public PackViewHolder(View itemView) {
-            super(itemView);
-//            ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
-//            tvPackName = (TextView) itemView.findViewById(R.id.tv_pack_name);
-//            tvCoach = itemView.findViewById(R.id.tv_coach);
-            view = itemView;
-        }
-
-        public void setData(PackModel packModel) {
-            if (packModel != null) {
-//                Picasso.with(context).load(packModel.getImageURL()).into(ivIcon);
-                tvPackName.setText(packModel.getPackName());
-                tvCoach.setText(packModel.getCoachName());
-                view.setTag(packModel);
-            }
-        }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
+        convertView = layoutInflater.inflate(R.layout.item_list_pack, null);
+        return convertView;
     }
 }
