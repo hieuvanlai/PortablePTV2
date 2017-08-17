@@ -20,5 +20,4 @@ public class RealmHandle {
     public static FaceBookModel getData(){
         return realm.where(FaceBookModel.class).findFirst();
     }
-
 }

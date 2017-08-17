@@ -20,7 +20,7 @@
         android:textAllCaps="true"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:text="Huân luyện viên"
+        android:text="Huấn luyện viên"
         android:textStyle="bold"
         android:layout_width="220dp"
         android:layout_centerHorizontal="true"

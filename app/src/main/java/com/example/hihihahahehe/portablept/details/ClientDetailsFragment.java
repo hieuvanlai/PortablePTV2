@@ -28,7 +28,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClientProfileFragment extends Fragment {
+public class ClientDetailsFragment extends Fragment {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.edt_name)
@@ -45,7 +45,7 @@ public class ClientProfileFragment extends Fragment {
     ImageView ivAvatar;
     private FaceBookModel faceBookModel;
 
-    public ClientProfileFragment() {
+    public ClientDetailsFragment() {
         // Required empty public constructor
     }
 

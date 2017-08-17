@@ -4,7 +4,6 @@ package com.example.hihihahahehe.portablept.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.details.ClientProfileFragment;
-import com.example.hihihahahehe.portablept.events.OnLoginEvent;
+import com.example.hihihahahehe.portablept.details.ClientDetailsFragment;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
 import com.squareup.picasso.Picasso;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
@@ -40,7 +34,7 @@ public class PersonFragment extends Fragment {
     ImageView ivAvatar;
     @BindView(R.id.cv_my_pack)
     CardView cvMyPack;
-    private ClientProfileFragment clientProfile;
+    private ClientDetailsFragment clientProfile;
     private ManagerPackFragment managerPackFragment;
     private FaceBookModel faceBookModel;
 
@@ -85,7 +79,7 @@ public class PersonFragment extends Fragment {
         cvInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clientProfile = new ClientProfileFragment();
+                clientProfile = new ClientDetailsFragment();
                 ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), clientProfile, R.id.layout_container, true);
             }
         });

@@ -19,6 +19,7 @@ public class FaceBookModel extends RealmObject{
     private String Birthday;
     private String Location;
     private String phone;
+    private boolean isTrainer = false;
 
     public String getPhone() {
         return phone;
@@ -28,7 +29,6 @@ public class FaceBookModel extends RealmObject{
         this.phone = phone;
     }
 
-    private boolean isTrainer;
 
     public boolean isTrainer() {
         return isTrainer;

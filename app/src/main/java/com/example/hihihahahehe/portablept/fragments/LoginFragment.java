@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.events.OnLoginEvent;
@@ -96,7 +97,7 @@ public class LoginFragment extends Fragment {
                     // App code
                     getInfoFacebook(loginResult);
 
-                    ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new FirstScreenFragment(), R.id.layout_container_main, false);
+                    ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new RoleFragment(), R.id.layout_container_main, false);
                 }
 
                 @Override
@@ -107,6 +108,7 @@ public class LoginFragment extends Fragment {
                 @Override
                 public void onError(FacebookException exception) {
                     // App code
+                    Toast.makeText(getContext(), "There is no connection !", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {

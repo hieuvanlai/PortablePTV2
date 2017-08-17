@@ -4,6 +4,7 @@ package com.example.hihihahahehe.portablept.fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.AddPack;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
+import com.example.hihihahahehe.portablept.utils.ScreenManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,7 +67,7 @@ public class CreatePackFragment extends Fragment {
         btCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                edtPackDes.clearComposingText();
             }
         });
 
@@ -96,6 +98,9 @@ public class CreatePackFragment extends Fragment {
                         Toast.makeText(getContext(), "Fail to create new Pack!", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
             }
         });
     }
