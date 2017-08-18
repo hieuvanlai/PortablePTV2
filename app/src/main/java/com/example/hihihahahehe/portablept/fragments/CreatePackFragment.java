@@ -91,16 +91,17 @@ public class CreatePackFragment extends Fragment {
                     @Override
                     public void onResponse(Call<PackJSONModel> call, Response<PackJSONModel> response) {
                         Toast.makeText(getContext(), "Success !", Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
                     }
 
                     @Override
                     public void onFailure(Call<PackJSONModel> call, Throwable t) {
                         Toast.makeText(getContext(), "Fail to create new Pack!", Toast.LENGTH_SHORT).show();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
                     }
                 });
-
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack();
             }
         });
     }

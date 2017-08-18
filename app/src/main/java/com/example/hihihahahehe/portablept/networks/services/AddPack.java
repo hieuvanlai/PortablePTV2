@@ -12,6 +12,6 @@ import retrofit2.http.Path;
  */
 
 public interface AddPack {
-    @POST("get-pack-add")
+    @POST("add-pack")
     Call<PackJSONModel> addPack(@Body PackJSONModel pack);
 }

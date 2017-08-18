@@ -18,7 +18,7 @@
                 android:background="@color/colorPrimary"/>
             <TextView
                 android:layout_marginTop="5dp"
-                android:id="@+id/tv_tittle"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên"
@@ -27,18 +27,18 @@
                 android:layout_toRightOf="@id/v_color"
                 />
             <TextView
-                android:id="@+id/tv_author"
+                android:id="@+id/tv_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thời gian dự kiến"
-                android:layout_below="@id/tv_tittle"
+                android:layout_below="@id/tv_name"
                 android:layout_toRightOf="@id/v_color"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/tv_goal"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/v_color"
-                android:layout_below="@id/tv_author"
+                android:layout_below="@id/tv_duration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mục tiêu"/>
