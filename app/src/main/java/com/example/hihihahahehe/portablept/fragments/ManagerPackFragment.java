@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.example.hihihahahehe.portablept.models.JSONModel.ListPackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
@@ -63,50 +62,45 @@ public class ManagerPackFragment extends Fragment {
 
         setupUI(view);
         loadData();
-        setupListPack();
         return view;
     }
 
     private void setupListPack() {
-        PackAdapter packAdapter = new PackAdapter(packModelList);
-        rvPacks.setAdapter(packAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        rvPacks.addItemDecoration(dividerItemDecoration);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rvPacks.setLayoutManager(manager);
+        rvPacks.setAdapter(new PackAdapter(packModelList, getContext()));
+        rvPacks.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void loadData() {
         final GetPacks getPacks = RetrofitFactory.getInstance().create(GetPacks.class);
         faceBookModel = RealmHandle.getData();
-        getPacks.getPacks().enqueue(new Callback<ListPackJSONModel>() {
+        getPacks.getPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
-            public void onResponse(Call<ListPackJSONModel> call, Response<ListPackJSONModel> response) {
-                if (response.body().getPackJSONModelList() != null) {
-                    for (PackJSONModel packJSONModel : response.body().getPackJSONModelList()) {
-                        PackModel packModel = new PackModel();
-                        packModel.setPackName(packJSONModel.getPackName());
-                        packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
-                        packModel.setGoal(packJSONModel.getPurpose());
-                        packModel.setCost(packJSONModel.getPrice());
-                        packModel.setDuration(packJSONModel.getDuration());
+            public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
+                if(response != null){
+                    Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                }
+                for(PackJSONModel packJSONModel : response.body()){
+                    PackModel packModel = new PackModel();
+                    packModel.setPackName(packJSONModel.getPackName());
+                    packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
+                    packModel.setGoal(packJSONModel.getPurpose());
+                    packModel.setCost(packJSONModel.getPrice());
+                    packModel.setDuration(packJSONModel.getDuration());
 
-                        packModelList.add(packModel);
-                    }
-
+                    packModelList.add(packModel);
                 }
             }
 
             @Override
-            public void onFailure(Call<ListPackJSONModel> call, Throwable t) {
-                Toast.makeText(getContext(), "Không thể kết nối đến server!", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<PackJSONModel>> call, Throwable t) {
+                Toast.makeText(getContext(), "Không thể kết nối đến server", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
-
+        setupListPack();
         setOnClickItem();
     }
 

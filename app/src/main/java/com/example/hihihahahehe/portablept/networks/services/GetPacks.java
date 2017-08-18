@@ -1,7 +1,8 @@
 package com.example.hihihahahehe.portablept.networks.services;
-
-import com.example.hihihahahehe.portablept.models.JSONModel.ListPackJSONModel;
+import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -13,5 +14,5 @@ import retrofit2.http.GET;
 
 public interface GetPacks {
     @GET("get-pack-add")
-    Call<ListPackJSONModel> getPacks ();
+    Call<List<PackJSONModel>> getPacks ();
 }
