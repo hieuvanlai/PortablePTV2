@@ -28,26 +28,31 @@ import butterknife.ButterKnife;
 public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder> {
     private List<PackModel> packModelList;
     private View.OnClickListener onClickListener;
-
-    public PackAdapter(List<PackModel> packModelList) {
-        this.packModelList = packModelList;
-    }
+    private Context context;
 
     public void setOnClick(View.OnClickListener onClickListener){
         this.onClickListener = onClickListener;
     }
 
+    public PackAdapter(List<PackModel> packModelList, Context context) {
+        this.packModelList = packModelList;
+        this.context = context;
+    }
+
     @Override
     public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_list_pack, parent, false);
-        view.setOnClickListener(onClickListener);
-        return new PackAdapter.PackViewHolder(view);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list_pack, null);
+        PackViewHolder viewHolder = new PackViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(PackViewHolder holder, int position) {
-        holder.setData(packModelList.get(position));
+        PackModel packModel = packModelList.get(position);
+
+        holder.tvNamePack.setText(packModel.getPackName());
+        holder.tvGoal.setText(packModel.getGoal());
+        holder.tvCost.setText(packModel.getCost());
     }
 
     @Override
@@ -64,23 +69,11 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         TextView tvGoal;
         @BindView(R.id.tv_cost)
         TextView tvCost;
-        View view;
 
         public PackViewHolder(View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);
-            view = itemView;
-        }
-            public void setData(PackModel packModel){
-            if(packModel != null){
-                tvNamePack.setText(packModel.getPackName());
-                tvDuration.setText(packModel.getDuration());
-                tvGoal.setText(packModel.getGoal());
-                tvCost.setText(packModel.getCost());
-
-                view.setTag(packModel);
-            }
         }
     }
 }
