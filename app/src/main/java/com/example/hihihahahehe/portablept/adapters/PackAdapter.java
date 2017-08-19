@@ -1,44 +1,48 @@
 package com.example.hihihahahehe.portablept.adapters;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.PackModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
- * Created by valky on 8/10/2017.
+ * Created by hihihahahehe on 8/15/17.
  */
 
 public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder> {
-
-    private List<PackModel> packModelList = new ArrayList<>();
-    private Context context;
+    private List<PackModel> packModelList;
     private View.OnClickListener onClickListener;
 
-    public void setOnItemClick(View.OnClickListener onClickListener) {
-        this.onClickListener = onClickListener;
+    public PackAdapter(List<PackModel> packModelList) {
+        this.packModelList = packModelList;
     }
 
-    public PackAdapter(List<PackModel> packModelList, Context context) {
-        this.packModelList = packModelList;
-        this.context = context;
+    public void setOnClick(View.OnClickListener onClickListener){
+        this.onClickListener = onClickListener;
     }
 
     @Override
     public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        //TODO add custom list pack
-        View view = null;
-        return new PackViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.item_list_pack, parent, false);
+        view.setOnClickListener(onClickListener);
+        return new PackAdapter.PackViewHolder(view);
     }
 
     @Override
@@ -52,24 +56,29 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
     }
 
     public class PackViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivIcon;
-        TextView tvPackName;
-        TextView tvCoach;
+        @BindView(R.id.tv_name)
+        TextView tvNamePack;
+        @BindView(R.id.tv_duration)
+        TextView tvDuration;
+        @BindView(R.id.tv_goal)
+        TextView tvGoal;
+        @BindView(R.id.tv_cost)
+        TextView tvCost;
         View view;
 
         public PackViewHolder(View itemView) {
             super(itemView);
-//            ivIcon = (ImageView) itemView.findViewById(R.id.iv_icon);
-//            tvPackName = (TextView) itemView.findViewById(R.id.tv_pack_name);
-//            tvCoach = itemView.findViewById(R.id.tv_coach);
+
+            ButterKnife.bind(this, itemView);
             view = itemView;
         }
+            public void setData(PackModel packModel){
+            if(packModel != null){
+                tvNamePack.setText(packModel.getPackName());
+                tvDuration.setText(packModel.getDuration());
+                tvGoal.setText(packModel.getGoal());
+                tvCost.setText(packModel.getCost());
 
-        public void setData(PackModel packModel) {
-            if (packModel != null) {
-//                Picasso.with(context).load(packModel.getImageURL()).into(ivIcon);
-                tvPackName.setText(packModel.getPackName());
-                tvCoach.setText(packModel.getCoachName());
                 view.setTag(packModel);
             }
         }

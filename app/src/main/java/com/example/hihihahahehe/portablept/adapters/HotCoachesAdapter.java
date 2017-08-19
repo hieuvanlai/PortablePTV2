@@ -39,7 +39,7 @@ public class HotCoachesAdapter extends RecyclerView.Adapter<HotCoachesAdapter.Ho
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_hot_coach, parent, false);
         view.setOnClickListener(onClickListener);
-        return null;
+        return new HotCoachesViewHolder(view);
     }
 
     @Override
@@ -72,7 +72,6 @@ public class HotCoachesAdapter extends RecyclerView.Adapter<HotCoachesAdapter.Ho
                 hotCoachesModel.setName("Bùi Quang Huy");
                 tvCoachName.setText(hotCoachesModel.getName());
                 ivCoachImage.setImageResource(R.drawable.sample_avatar);
-
             }
         }
     }

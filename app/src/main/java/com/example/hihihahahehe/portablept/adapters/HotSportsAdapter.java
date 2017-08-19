@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
@@ -35,7 +37,7 @@ public class HotSportsAdapter extends RecyclerView.Adapter<HotSportsAdapter.HotS
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_hot_sport, parent, false);
         view.setOnClickListener(onClickListener);
-        return null;
+        return new HotSportsViewHolder(view);
     }
 
     @Override
@@ -50,12 +52,23 @@ public class HotSportsAdapter extends RecyclerView.Adapter<HotSportsAdapter.HotS
 
 
     public class HotSportsViewHolder extends RecyclerView.ViewHolder {
+        TextView tvSportName;
+        ImageView ivSportImage;
+
+        View view;
         public HotSportsViewHolder(View itemView) {
             super(itemView);
+            tvSportName = (TextView) itemView.findViewById(R.id.tv_sport_name);
+            ivSportImage = (ImageView) itemView.findViewById(R.id.iv_sport_image);
+
+            view = itemView;
         }
 
         public void setData(HotSportsModel hotSportsModel){
-
+            if (hotSportsModel != null){
+                tvSportName.setText("Boxing");
+                ivSportImage.setImageResource(R.drawable.sample_sport_image);
+            }
         }
     }
 

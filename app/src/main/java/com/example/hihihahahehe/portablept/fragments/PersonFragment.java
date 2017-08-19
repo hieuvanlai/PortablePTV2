@@ -4,26 +4,22 @@ package com.example.hihihahahehe.portablept.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
-import com.example.hihihahahehe.portablept.details.ClientProfileFragment;
-import com.example.hihihahahehe.portablept.events.OnLoginEvent;
+import com.example.hihihahahehe.portablept.details.ClientDetailsFragment;
 import com.example.hihihahahehe.portablept.utils.RealmHandle;
 import com.example.hihihahahehe.portablept.utils.ScreenManager;
 import com.example.hihihahahehe.portablept.models.FaceBookModel;
-import com.github.siyamed.shapeimageview.CircularImageView;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +31,11 @@ public class PersonFragment extends Fragment {
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.iv_avatar)
-    CircularImageView ivAvatar;
-    private ClientProfileFragment clientProfile;
+    ImageView ivAvatar;
+    @BindView(R.id.cv_my_pack)
+    CardView cvMyPack;
+    private ClientDetailsFragment clientProfile;
+    private ManagerPackFragment managerPackFragment;
     private FaceBookModel faceBookModel;
 
     public PersonFragment() {
@@ -61,6 +60,8 @@ public class PersonFragment extends Fragment {
     public void loadData() {
         if (RealmHandle.getData() != null) {
             faceBookModel = RealmHandle.getData();
+
+            Picasso.with(getContext()).load(faceBookModel.getImg()).transform(new CropCircleTransformation()).into(ivAvatar);
             String firstName;
             String lastName;
             if (faceBookModel.getFirst_Name() == null) {
@@ -78,8 +79,16 @@ public class PersonFragment extends Fragment {
         cvInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clientProfile = new ClientProfileFragment();
+                clientProfile = new ClientDetailsFragment();
                 ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), clientProfile, R.id.layout_container, true);
+            }
+        });
+
+        cvMyPack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                managerPackFragment = new ManagerPackFragment();
+                ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), managerPackFragment, R.id.layout_container, true);
             }
         });
     }

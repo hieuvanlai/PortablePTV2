@@ -34,12 +34,11 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.home_pager)
     ViewPager homePager;
 
-    @BindView(R.id.rv_hot_coaches)
+
     RecyclerView rvHotCoaches;
 
     @BindView(R.id.tv_hot_sports)
     TextView tvHotSports;
-    @BindView(R.id.rv_hot_sports)
     RecyclerView rvHotSports;
 
     private List<HotCoachesModel> hotCoachesModelList = new ArrayList<>();
@@ -58,6 +57,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        rvHotCoaches = (RecyclerView) view.findViewById(R.id.rv_hot_coaches);
+        rvHotSports = (RecyclerView) view.findViewById(R.id.rv_hot_sports);
+
         setupUI(view);
         loadData();
 
@@ -73,12 +75,11 @@ public class HomeFragment extends Fragment {
 
         HotCoachesModel hotCoachesModel = new HotCoachesModel();
         hotCoachesModelList.add(hotCoachesModel);
-
-
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);
 
-
+        HotSportsModel hotSportsModel = new HotSportsModel();
+        hotSportsModelList.add(hotSportsModel);
         hotSportsAdapter = new HotSportsAdapter(hotSportsModelList, getContext());
         rvHotSports.setAdapter(hotSportsAdapter);
 
