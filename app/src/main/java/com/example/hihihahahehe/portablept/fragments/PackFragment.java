@@ -46,6 +46,7 @@ public class PackFragment extends Fragment {
                 "Fitness",
                 "Zumba",
                 "Kickfit",
+                "Boxing"
         };
 
         for(int i = 0; i < listPack.length; i++){
