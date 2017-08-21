@@ -7,14 +7,14 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PackJSONModel{
-    @SerializedName("phone")
+    @SerializedName("phoneNumber")
     private String phoneNumber;
-    @SerializedName("goal")
+    @SerializedName("purpose")
     private String purpose;
     private String packName;
-    @SerializedName("coachName")
+    @SerializedName("coach")
     private String coach;
-    @SerializedName("cost")
+    @SerializedName("price")
     private String price;
     private String duration;
 

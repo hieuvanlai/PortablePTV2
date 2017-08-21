@@ -41,7 +41,6 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.home_pager)
     ViewPager homePager;
 
-
     RecyclerView rvHotCoaches;
 
     @BindView(R.id.tv_hot_sports)
