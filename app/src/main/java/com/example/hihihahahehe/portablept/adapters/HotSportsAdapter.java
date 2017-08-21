@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +68,11 @@ public class HotSportsAdapter extends RecyclerView.Adapter<HotSportsAdapter.HotS
 
         public void setData(HotSportsModel hotSportsModel){
             if (hotSportsModel != null){
-                tvSportName.setText("Boxing");
-                ivSportImage.setImageResource(R.drawable.sample_sport_image);
+                tvSportName.setText(hotSportsModel.getName());
+                Picasso.with(context)
+                        .load(hotSportsModel.getImageURL())
+                        .into(ivSportImage);
+                ivSportImage.setImageAlpha(90);
             }
         }
     }
