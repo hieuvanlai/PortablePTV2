@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by valky on 8/17/2017.
@@ -69,9 +71,10 @@ public class HotCoachesAdapter extends RecyclerView.Adapter<HotCoachesAdapter.Ho
 
         public void setData(HotCoachesModel hotCoachesModel){
             if(hotCoachesModel != null){
-                hotCoachesModel.setName("Bùi Quang Huy");
                 tvCoachName.setText(hotCoachesModel.getName());
-                ivCoachImage.setImageResource(R.drawable.sample_avatar);
+                Picasso.with(context).load(R.drawable.sample_avatar)
+                        .transform(new CropCircleTransformation())
+                        .into(ivCoachImage);
             }
         }
     }
