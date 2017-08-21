@@ -5,18 +5,18 @@ package com.example.hihihahahehe.portablept.models;
  */
 
 public class HotSportsModel{
-    private String id;
+    private String imageURL;
     private String name;
 
     public HotSportsModel() {
     }
 
-    public String getId() {
-        return id;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getName() {

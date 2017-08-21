@@ -5,6 +5,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,8 +21,10 @@ import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
+import com.example.hihihahahehe.portablept.models.JSONModel.SportsJSONModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetPacks;
+import com.example.hihihahahehe.portablept.networks.services.GetSports;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +90,26 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<PackJSONModel>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed to load data into HomeFragment", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Failed to load hot coaches into HomeFragment", Toast.LENGTH_SHORT);
+            }
+        });
+
+        final GetSports getSports = RetrofitFactory.getInstance().create(GetSports.class);
+        getSports.getSports().enqueue(new Callback<List<SportsJSONModel>>() {
+            @Override
+            public void onResponse(Call<List<SportsJSONModel>> call, Response<List<SportsJSONModel>> response) {
+                for(SportsJSONModel sportsJSONModel : response.body()){
+                    HotSportsModel hotSportsModel = new HotSportsModel();
+                    hotSportsModel.setName(sportsJSONModel.getSportsName());
+                    hotSportsModel.setImageURL(sportsJSONModel.getImageURL());
+                    hotSportsModelList.add(hotSportsModel);
+                }
+                hotSportsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<SportsJSONModel>> call, Throwable t) {
+                Toast.makeText(getContext(), "Failed to load hot sports into HomeFragment", Toast.LENGTH_SHORT);
             }
         });
     }
@@ -98,15 +120,13 @@ public class HomeFragment extends Fragment {
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);
 
-        HotSportsModel hotSportsModel = new HotSportsModel();
-        hotSportsModelList.add(hotSportsModel);
         hotSportsAdapter = new HotSportsAdapter(hotSportsModelList, getContext());
         rvHotSports.setAdapter(hotSportsAdapter);
 
-        final LinearLayoutManager linearLayoutManagerCoaches = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        final LinearLayoutManager linearLayoutManagerSports = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        final GridLayoutManager gridLayoutManagerCoaches = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);
+        final GridLayoutManager gridLayoutManagerSports = new GridLayoutManager(getContext(), 2 , GridLayoutManager.HORIZONTAL, false);
 
-        rvHotCoaches.setLayoutManager(linearLayoutManagerCoaches);
-        rvHotSports.setLayoutManager(linearLayoutManagerSports);
+        rvHotCoaches.setLayoutManager(gridLayoutManagerCoaches);
+        rvHotSports.setLayoutManager(gridLayoutManagerSports);
     }
 }
