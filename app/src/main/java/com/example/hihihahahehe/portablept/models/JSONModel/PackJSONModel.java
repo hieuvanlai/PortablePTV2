@@ -16,6 +16,7 @@ public class PackJSONModel{
     private String coach;
     @SerializedName("price")
     private String price;
+    @SerializedName("duration")
     private String duration;
 
     public PackJSONModel(String phoneNumber, String purpose, String packName, String coach, String price, String duration) {

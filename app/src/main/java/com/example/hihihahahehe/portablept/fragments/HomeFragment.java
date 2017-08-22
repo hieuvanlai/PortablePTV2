@@ -18,10 +18,12 @@ import android.widget.Toast;
 import com.example.hihihahahehe.portablept.R;
 import com.example.hihihahahehe.portablept.adapters.HotCoachesAdapter;
 import com.example.hihihahahehe.portablept.adapters.HotSportsAdapter;
+import com.example.hihihahahehe.portablept.adapters.PackAdapter;
 import com.example.hihihahahehe.portablept.models.HotCoachesModel;
 import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.PackJSONModel;
 import com.example.hihihahahehe.portablept.models.JSONModel.SportsJSONModel;
+import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
@@ -50,11 +52,17 @@ public class HomeFragment extends Fragment {
     TextView tvHotSports;
     RecyclerView rvHotSports;
 
+    @BindView(R.id.tv_hot_packs)
+    TextView tvHotPacks;
+    RecyclerView rvHotPacks;
+
     private List<HotCoachesModel> hotCoachesModelList = new ArrayList<>();
     private List<HotSportsModel> hotSportsModelList = new ArrayList<>();
+    private List<PackModel> hotPackModelList = new ArrayList<>();
 
     private HotCoachesAdapter hotCoachesAdapter;
     private HotSportsAdapter hotSportsAdapter;
+    private PackAdapter hotPackAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,6 +76,7 @@ public class HomeFragment extends Fragment {
 
         rvHotCoaches = (RecyclerView) view.findViewById(R.id.rv_hot_coaches);
         rvHotSports = (RecyclerView) view.findViewById(R.id.rv_hot_sports);
+        rvHotPacks = (RecyclerView) view.findViewById(R.id.rv_hot_packs);
 
         loadData();
         setupUI(view);
@@ -84,8 +93,17 @@ public class HomeFragment extends Fragment {
                     HotCoachesModel hotCoachesModel = new HotCoachesModel();
                     hotCoachesModel.setName(packJSONModel.getCoach());
                     hotCoachesModelList.add(hotCoachesModel);
+
+                    PackModel hotPackModel = new PackModel();
+                    hotPackModel.setCoachName(packJSONModel.getCoach());
+                    hotPackModel.setCost(packJSONModel.getPrice());
+                    hotPackModel.setDuration(packJSONModel.getDuration());
+                    hotPackModel.setPackName(packJSONModel.getPackName());
+                    hotPackModel.setGoal(packJSONModel.getPurpose());
+                    hotPackModelList.add(hotPackModel);
                 }
                 hotCoachesAdapter.notifyDataSetChanged();
+                hotPackAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -123,10 +141,15 @@ public class HomeFragment extends Fragment {
         hotSportsAdapter = new HotSportsAdapter(hotSportsModelList, getContext());
         rvHotSports.setAdapter(hotSportsAdapter);
 
+        hotPackAdapter = new PackAdapter(hotPackModelList, getContext());
+        rvHotPacks.setAdapter(hotPackAdapter);
+
         final GridLayoutManager gridLayoutManagerCoaches = new GridLayoutManager(getContext(), 2, GridLayoutManager.HORIZONTAL, false);
         final GridLayoutManager gridLayoutManagerSports = new GridLayoutManager(getContext(), 2 , GridLayoutManager.HORIZONTAL, false);
+        final LinearLayoutManager linearLayoutManagerPacks = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         rvHotCoaches.setLayoutManager(gridLayoutManagerCoaches);
         rvHotSports.setLayoutManager(gridLayoutManagerSports);
+        rvHotPacks.setLayoutManager(linearLayoutManagerPacks);
     }
 }

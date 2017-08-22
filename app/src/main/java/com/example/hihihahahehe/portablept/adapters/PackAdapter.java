@@ -53,6 +53,7 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
         holder.tvNamePack.setText(packModel.getPackName());
         holder.tvGoal.setText(packModel.getGoal());
         holder.tvCost.setText(packModel.getCost());
+        holder.tvDuration.setText(packModel.getDuration());
     }
 
     @Override

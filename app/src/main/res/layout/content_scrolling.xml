@@ -18,6 +18,7 @@
         android:padding="15dp"
         android:text="Hot"
         android:textSize="14sp"
+        android:textColor="#fff"
         android:textStyle="bold" />
 
     <android.support.v4.view.ViewPager
@@ -36,6 +37,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/home_pager"
         android:padding="15dp"
+        android:textColor="#fff"
         android:text="Huấn luyện viên Hot"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -57,6 +59,7 @@
         android:text="Môn tập Hot"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:textColor="#fff"
         android:layout_below="@+id/rv_hot_coaches"
         android:layout_alignParentStart="true" />
 
@@ -77,6 +80,7 @@
             android:text="Gói tập Hot"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="#fff"
             android:layout_below="@+id/rv_hot_sports"
             android:layout_alignParentStart="true" />
 
