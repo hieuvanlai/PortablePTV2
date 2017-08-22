@@ -27,6 +27,7 @@ import com.example.hihihahahehe.portablept.models.PackModel;
 import com.example.hihihahahehe.portablept.networks.RetrofitFactory;
 import com.example.hihihahahehe.portablept.networks.services.GetPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,8 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     @BindView(R.id.tv_hot)
     TextView tvHot;
-    @BindView(R.id.home_pager)
-    ViewPager homePager;
+    @BindView(R.id.iv_cover_photo)
+    ImageView ivCoverPhoto;
 
     RecyclerView rvHotCoaches;
 
@@ -134,6 +135,10 @@ public class HomeFragment extends Fragment {
 
     private void setupUI(View view) {
         ButterKnife.bind(this, view);
+
+        Picasso.with(getContext())
+                .load("https://i.ytimg.com/vi/hVWLn9m6Ezg/maxresdefault.jpg")
+                .into(ivCoverPhoto);
 
         hotCoachesAdapter = new HotCoachesAdapter(hotCoachesModelList, getContext());
         rvHotCoaches.setAdapter(hotCoachesAdapter);
