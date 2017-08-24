@@ -2,6 +2,9 @@ package com.example.hihihahahehe.portablept.utils;
 
 import android.support.design.widget.TabLayout;
 
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
 /**
  * Created by hihihahahehe on 8/9/17.
  */
@@ -40,5 +43,10 @@ public class Utils {
         tabLayout.addTab(tabLayout.newTab().setText(title));
     }
 
+    public static String removeAccent(String s) {
 
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("");
+    }
 }

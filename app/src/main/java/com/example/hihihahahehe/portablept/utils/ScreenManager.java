@@ -28,4 +28,8 @@ public class ScreenManager {
         }
         fragmentTransaction.commit();
     }
+
+    public static void onBackPressed(FragmentManager fragmentManager){
+        fragmentManager.popBackStack();
+    }
 }

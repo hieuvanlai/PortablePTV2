@@ -51,15 +51,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Giá"/>
-
-            <android.support.v7.widget.AppCompatRatingBar
-                android:layout_toRightOf="@id/v_color"
-                style="?android:attr/ratingBarStyleIndicator"
-                android:numStars="5"
-                android:layout_below="@+id/tv_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

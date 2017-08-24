@@ -42,6 +42,7 @@ public class ManagerPackFragment extends Fragment {
     private FragmentManager fm;
     private List<PackModel> packModelList = new ArrayList<>();
     private FaceBookModel faceBookModel;
+    private PackAdapter packAdapter;
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -66,7 +67,8 @@ public class ManagerPackFragment extends Fragment {
     }
 
     private void setupListPack() {
-        rvPacks.setAdapter(new PackAdapter(packModelList, getContext()));
+        packAdapter = new PackAdapter(packModelList, getContext());
+        rvPacks.setAdapter(packAdapter);
         rvPacks.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -76,18 +78,18 @@ public class ManagerPackFragment extends Fragment {
         getPacks.getPacks().enqueue(new Callback<List<PackJSONModel>>() {
             @Override
             public void onResponse(Call<List<PackJSONModel>> call, Response<List<PackJSONModel>> response) {
-                if(response != null){
-                    Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
-                }
-                for(PackJSONModel packJSONModel : response.body()){
-                    PackModel packModel = new PackModel();
-                    packModel.setPackName(packJSONModel.getPackName());
-                    packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
-                    packModel.setGoal(packJSONModel.getPurpose());
-                    packModel.setCost(packJSONModel.getPrice());
-                    packModel.setDuration(packJSONModel.getDuration());
+                if (response.body() != null) {
+                    for (PackJSONModel packJSONModel : response.body()) {
+                        PackModel packModel = new PackModel();
+                        packModel.setPackName(packJSONModel.getPackName());
+                        packModel.setCoachName(faceBookModel.getLast_Name() + " " + faceBookModel.getFirst_Name());
+                        packModel.setGoal(packJSONModel.getPurpose());
+                        packModel.setCost(packJSONModel.getPrice());
+                        packModel.setDuration(packJSONModel.getDuration());
 
-                    packModelList.add(packModel);
+                        packModelList.add(packModel);
+                    }
+                    packAdapter.notifyDataSetChanged();
                 }
             }
 

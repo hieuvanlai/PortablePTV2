@@ -18,14 +18,34 @@ public class PackJSONModel{
     private String price;
     @SerializedName("duration")
     private String duration;
+    private String packImgUrl;
+    private String address;
 
-    public PackJSONModel(String phoneNumber, String purpose, String packName, String coach, String price, String duration) {
+    public PackJSONModel(String phoneNumber, String purpose, String packName, String coach, String price, String duration, String packImgUrl, String address) {
         this.phoneNumber = phoneNumber;
         this.purpose = purpose;
         this.packName = packName;
         this.coach = coach;
         this.price = price;
         this.duration = duration;
+        this.packImgUrl = packImgUrl;
+        this.address = address;
+    }
+
+    public String getPackImgUrl() {
+        return packImgUrl;
+    }
+
+    public void setPackImgUrl(String packImgUrl) {
+        this.packImgUrl = packImgUrl;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getPhoneNumber() {

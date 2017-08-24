@@ -50,6 +50,7 @@
             android:text="Họ và tên * " />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
             android:text="Email * " />
 
         <EditText
+            android:focusable="false"
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#591a61</color>
     <color name="colorAccent">#FF4081</color>
     <color name="week">#d1caca</color>
+    <color name="colorHint">#666666</color>
 </resources>
