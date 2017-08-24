@@ -29,6 +29,8 @@ import com.example.hihihahahehe.portablept.networks.services.GetPacks;
 import com.example.hihihahahehe.portablept.networks.services.GetSports;
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +105,7 @@ public class HomeFragment extends Fragment {
                     hotPackModel.setGoal(packJSONModel.getPurpose());
                     hotPackModelList.add(hotPackModel);
                 }
+
                 hotCoachesAdapter.notifyDataSetChanged();
                 hotPackAdapter.notifyDataSetChanged();
             }
@@ -123,6 +126,7 @@ public class HomeFragment extends Fragment {
                     hotSportsModel.setImageURL(sportsJSONModel.getImageURL());
                     hotSportsModelList.add(hotSportsModel);
                 }
+                EventBus.getDefault().postSticky(hotSportsModelList);
                 hotSportsAdapter.notifyDataSetChanged();
             }
 

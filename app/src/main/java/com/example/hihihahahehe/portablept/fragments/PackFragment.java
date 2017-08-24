@@ -5,12 +5,19 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hihihahahehe.portablept.R;
+import com.example.hihihahahehe.portablept.models.HotSportsModel;
 import com.example.hihihahahehe.portablept.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +31,8 @@ public class PackFragment extends Fragment {
     ViewPager viewPager;
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
+    int checkdata=0;
+    private List<HotSportsModel> hotSportsModelList;
 
     public PackFragment() {
         // Required empty public constructor
@@ -33,24 +42,26 @@ public class PackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment_pack, container, false);
-        initView(view);
-
+        ButterKnife.bind(this, view);
+        Utils.addTab(tabLayout,"");
         return view;
     }
-
-    private void initView(View view) {
-        ButterKnife.bind(this, view);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        String[] listPack = {
-                "Fitness",
-                "Zumba",
-                "Kickfit",
-                "Boxing"
-        };
-
-        for(int i = 0; i < listPack.length; i++){
-            Utils.addTab(tabLayout,listPack[i]);
+    @Subscribe(sticky = true)
+    public  void onRecivedPack (List<HotSportsModel>  hotSportsModelList){
+        if (checkdata==0){
+            this.hotSportsModelList = hotSportsModelList;
+            Log.d("TEST",hotSportsModelList.get(1).getName());
+            tabLayout.removeAllTabs();
+            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            for(int i = 0; i < hotSportsModelList.size(); i++){
+                Utils.addTab(tabLayout,hotSportsModelList.get(i).getName());
+            }
+            checkdata=1;
         }
+
+
     }
+
 }

@@ -41,7 +41,7 @@ public class PackAdapter extends RecyclerView.Adapter<PackAdapter.PackViewHolder
 
     @Override
     public PackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_list_pack, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list_pack_hot, null);
         PackViewHolder viewHolder = new PackViewHolder(view);
         return viewHolder;
     }

@@ -89,6 +89,7 @@ public class LoginFragment extends Fragment {
         // Other app specific specialization
 
         // Callback registration, check if not login before
+        ScreenManager.replaceFragment(getActivity().getSupportFragmentManager(), new RoleFragment(), R.id.layout_container_main, false);
         if(accessToken == null) {
 
             loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
